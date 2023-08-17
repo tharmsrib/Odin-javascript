@@ -39,26 +39,35 @@ function game(){
     let p_score = 0; let c_score = 0;
     // let numRounds = prompt('How many rounds?');
     let numRounds = 5;
-    for (let i_round = 0; i_round<numRounds;i_round++){
-        let playerSelection = prompt('Select Rock, Paper, or Scissor'); //player input
-        const computerSelection = getComputerChoice();  //computer selection
-        //display slection
-        console.log('you chose: ' + playerSelection)
-        console.log('I chose: ' + computerSelection)
-        //play & display
-        let results = play1Round(playerSelection, computerSelection)
-        let message = results[0];
-        let score_add = results[1];
-        console.log(message);
-        // console.log(results);
-        // add score
-        p_score += score_add[0];
-        c_score += score_add[1];
-        console.log(`Score(you,me): ${p_score} - ${c_score}`)
-        if(p_score===Math.ceil(numRounds/2) || c_score===Math.ceil(numRounds/2)){
-            
-            break;
+    let i_round = 0
+    while (i_round<numRounds){
+        let playerSelection = prompt('Select Rock, Paper, or Scissor').toLowerCase(); //player input
+        //check for valid response
+        if (playerSelection.includes('rock')||playerSelection.includes('paper')||playerSelection.includes('scissor')){
+            //make sure input only rock paper or scissor
+            const computerSelection = getComputerChoice();  //computer selection
+            //display slection
+            console.log('you chose: ' + playerSelection)
+            console.log('I chose: ' + computerSelection)
+            //play & display
+            let results = play1Round(playerSelection, computerSelection)
+            let message = results[0];
+            let score_add = results[1];
+            console.log(message);
+            // console.log(results);
+            // add score
+            p_score += score_add[0];
+            c_score += score_add[1];
+            console.log(`Score(you,me): ${p_score} - ${c_score}`)
+            if(p_score===Math.ceil(numRounds/2) || c_score===Math.ceil(numRounds/2)){
+                
+                break;
+            }
+            i_round++
+        }else{
+            console.log('invalid input, do again!')
         }
+        
 
 
     }
