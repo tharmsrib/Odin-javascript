@@ -40,6 +40,7 @@ function game(){
     // let numRounds = prompt('How many rounds?');
     let numRounds = 5;
     let i_round = 0
+    console.log(`Play best of ${numRounds} rounds`)
     while (i_round<numRounds){
         let playerSelection = prompt('Select Rock, Paper, or Scissor').toLowerCase(); //player input
         //check for valid response
