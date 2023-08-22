@@ -81,3 +81,16 @@ function game(){
     }
 
 }
+
+// create dom nodes for buttons
+const buttons = document.querySelectorAll('button');
+function displayPlayerSelection(e){
+    // console.log(e);
+    console.log(this.classList.value);
+    // e.stopProgression();
+}
+buttons.forEach(button => {
+    button.addEventListener('click',displayPlayerSelection)
+});
+
+
