@@ -1,0 +1,43 @@
+
+/* body{
+    background-color: #13b4ff;
+} */
+.container{
+
+    /* width: 90%; */
+    display: flex;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.tiles{
+    background-color: red;
+    width: 5px;
+    height: 5px;
+}
+
+
+/* .wrapper {
+    display: flex;
+} */
+/* 
+.box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+    background: #13b4ff;
+}
+
+.purple {
+    background: #ab3fdd;
+}
+
+.wine {
+    background: #ae163e;
+}    */
