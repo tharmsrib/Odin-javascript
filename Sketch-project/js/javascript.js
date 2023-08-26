@@ -17,10 +17,14 @@ function createDivGrid(numGrid){
 
         i++;
     }
-
-    
 }
 
+function removeAllTiles(){
+    //remove all childs of grids (tiles)
+    while (grids.firstChild) {
+        grids.removeChild(grids.lastChild);
+    }
+}
 function createTileElement(){
     const newDiv = document.createElement('div');
     newDiv.classList.add('tiles');
@@ -33,18 +37,34 @@ function changeTileColor(e){
     // console.log(this.classList);
 }
 
+function getGridSize(e){
+    // console.log('hello');
+    e.stopPropagation();
+    //ask user for number
+    let input = Number(prompt('enter grid size','number'));
+    // console.log(input)
+    if(!isNaN(input)||input!=0){
+        getNumGrid = input;
+        console.log('hello');
+        createDivGrid(getNumGrid);
 
+        
+    }else{
+        console.log('invalid input');
+    }
+    
+
+}
 
 
 const container = document.querySelector('.container');
 const grids = document.querySelector('.grid');
-let numGrid; //size of grid
-createDivGrid(5);
-console.log(container); 
+
 
 const newGridButton = document.querySelector('.newGridButton');
-newGridButton.addEventListener('click',function(){
-    console.log('hello');
-    //ask user for number
-})
+newGridButton.addEventListener('click',getGridSize);
+
+let getNumGrid; //size of grid
+createDivGrid(5);
+
 
