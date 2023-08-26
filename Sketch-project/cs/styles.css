@@ -6,38 +6,31 @@
 
     /* width: 90%; */
     display: flex;
+    width: 300px;
+    height: 300px;
+    border: 5px solid blue;
+    justify-content: center;
 }
-.box {
-    width: 100px;
-    height: 100px;
-    border: 1px solid rgba(0, 0, 0, .2);
+
+
+.grid{
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(5,1fr);
+    
+    gap: 0px;  
+    margin: 25%;
+    max-width: 300px;
+    max-height: 300px;
+    border: 2px solid green;
 }
 
 .tiles{
+    /* flex: 1 1 auto; */
+    /* display: grid; */
     background-color: red;
-    width: 5px;
-    height: 5px;
+    border: 1px solid black;
+    /* place-items: center; */
+    justify-content: stretch;
 }
 
-
-/* .wrapper {
-    display: flex;
-} */
-/* 
-.box {
-    width: 20px;
-    height: 20px;
-    border: 1px solid rgba(0, 0, 0, .2);
-}
-
-.blue {
-    background: #13b4ff;
-}
-
-.purple {
-    background: #ab3fdd;
-}
-
-.wine {
-    background: #ae163e;
-}    */
