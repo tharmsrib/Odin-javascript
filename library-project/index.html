@@ -7,9 +7,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="library-container">
+    <div class="container">
+        <div class="library-container">
+        </div>
+        <div class="buttons">
+            <button class="newBookBtn">New Book</button>
+        </div>
 
-        
+        <dialog id="newBookDialog">
+            <form >
+                <label for="newBookTitle">Book title</label>
+                <input type="text" name="newBookTitle" id="newBookTitle" required />
+                <label for="newBookAuthor">Book author</label>
+                <input type="text" name="newBookAuthor" id="newBookAuthor" required />
+                <label for="newBookNumPage">Number of pages</label>
+                <input type="text" name="newBookNumPage" id="newBookNumPage" required />
+
+
+                <div class="buttons dialogBtn">
+                    <button type="button" formmethod="dialog" id="cancelBtn" value="cancel" >Cancel</button>
+                    <button type="button" id="confirmBtn" value="default">Confirm</button>
+                </div>
+            </form>
+          </dialog>
 
     </div>
 
