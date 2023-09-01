@@ -31,6 +31,21 @@ function displayBooks(){
     })
 }
 
+function displayLastBook(){
+    let i = myLibrary.length -1;//-1 for the indexing
+    
+    
+    //create element and add class and text to it
+    // console.log(book);
+
+    const newBookDiv = createBookCardsElement(myLibrary[i]);
+    newBookDiv.classList.add(`card${i}`);       
+    libraryDiv.appendChild(newBookDiv);
+
+
+
+}
+
 function createBookCardsElement(bookObj){
     //create div element and add book content to it
     let newDiv = document.createElement('div');
@@ -40,7 +55,8 @@ function createBookCardsElement(bookObj){
     a.textContent = bookObj.name;
     // a.textContent = 'hahaa';
     newDiv.appendChild(a);
-    // console.log(newDiv)
+    console.log(`creating div : `);
+    console.log(newDiv);
     return newDiv;
 }
 
@@ -76,11 +92,12 @@ confirmBtn.addEventListener("click", (event) => {
     if(title!='' && author!=''&&numPage!=null ){
         //create new book object
         let newBook = new Book(title,author,numPage);
+        console.log(`new book object: `);
         console.log(newBook);
         //add new book to library array
         addBookToLibrary(newBook);
         console.log('new book add')
-        console.log(myLibrary)
+        console.log(myLibrary);
             
         confirmBtn.value = 'submit';
         event.preventDefault(); // We don't want to submit this fake form
@@ -107,8 +124,8 @@ newBookDialog.addEventListener("close", () => {
     }else if(newBookDialog.returnValue==='submit'){
         //display new one
         console.log('display');
-        removeAllBooks();
-        displayBooks();
+        // removeAllBooks();
+        displayLastBook();
 
     }
     
@@ -116,8 +133,8 @@ newBookDialog.addEventListener("close", () => {
 });
 
 //manual book
-let bookA = new Book('a');
-let bookB = new Book('b');
+let bookA = new Book('a','gg',3);
+let bookB = new Book('b','gg',3);
 addBookToLibrary(bookA);
 addBookToLibrary(bookB);
 displayBooks();
