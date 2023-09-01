@@ -44,6 +44,13 @@ function createBookCardsElement(bookObj){
     return newDiv;
 }
 
+function removeAllBooks(){
+    //remove all childs of libraryDiv
+    while (libraryDiv.firstChild) {
+        libraryDiv.removeChild(libraryDiv.lastChild);
+    }
+}
+
 
 const myLibrary = [];
 const libraryDiv = document.querySelector('.library-container');
@@ -66,12 +73,23 @@ confirmBtn.addEventListener("click", (event) => {
     let title = document.querySelector('#newBookTitle').value;
     let author = document.querySelector('#newBookAuthor').value;
     let numPage = document.querySelector('#newBookNumPage').value;
-    //create new book object
-    let newBook = new Book(title,author,numPage);
-    console.log(newBook);
-    confirmBtn.value = 'submit';
-    event.preventDefault(); // We don't want to submit this fake form
-    newBookDialog.close(newBook); // Have to send the select box value here.
+    if(title!='' && author!=''&&numPage!=null ){
+        //create new book object
+        let newBook = new Book(title,author,numPage);
+        console.log(newBook);
+        //add new book to library array
+        addBookToLibrary(newBook);
+        console.log('new book add')
+        console.log(myLibrary)
+            
+        confirmBtn.value = 'submit';
+        event.preventDefault(); // We don't want to submit this fake form
+        newBookDialog.close(confirmBtn.value); // Have to send the select box value here.
+    
+    }
+    
+
+
 });
 
 cancelBtn.addEventListener("click", ()=>{
@@ -80,22 +98,18 @@ cancelBtn.addEventListener("click", ()=>{
 
 // "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
 newBookDialog.addEventListener("close", () => {
-    // outputBox.value =
-    //   favDialog.returnValue === "default"
-    //     ? "No return value."
-    //     : `ReturnValue: ${favDialog.returnValue}.`; // Have to check for "default" rather than empty string
     //check if cancel or confirm button pushed
-    // console.log(newBookDialog.returnValue)
+    console.log(newBookDialog.returnValue)
     if(newBookDialog.returnValue==='default'){
-        console.log('no return value')
+        console.log('no return value');
     }else if(newBookDialog.returnValue==='cancel'){
-        console.log('cancel')
+        console.log('cancel');
     }else if(newBookDialog.returnValue==='submit'){
-        //add new book to library array
-        // addBookToLibrary(newBookDialog.returnValue);
-        console.log('new book add')
-        console.log(myLibrary)
         //display new one
+        console.log('display');
+        removeAllBooks();
+        displayBooks();
+
     }
     
 
