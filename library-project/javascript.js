@@ -46,15 +46,33 @@ function displayLastBook(){
 
 }
 
+function createRemoveButton(parentElement){
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('removeBtn');
+    removeBtn.textContent = 'X';
+    //funct callback attachment
+    removeBtn.addEventListener('click',()=>{
+        parentElement.remove();
+    })
+
+    parentElement.appendChild(removeBtn);
+}
+
 function createBookCardsElement(bookObj){
     //create div element and add book content to it
     let newDiv = document.createElement('div');
     let a = document.createElement('a');
     newDiv.classList.add('bookCard');
     a.classList.add('bookContent');
-    a.textContent = bookObj.name;
-    // a.textContent = 'hahaa';
+    a.textContent = `${bookObj.name} by ${bookObj.name} number pages: ${bookObj.numPage}`;
     newDiv.appendChild(a);
+    //append read check box
+
+
+    //append remove button
+    createRemoveButton(newDiv);
+    
+    
     console.log(`creating div : `);
     console.log(newDiv);
     return newDiv;
@@ -74,6 +92,13 @@ const newBookButton = document.querySelector('.newBookBtn');
 const newBookDialog = document.getElementById('newBookDialog');
 const confirmBtn = document.getElementById('confirmBtn');
 const cancelBtn = document.getElementById('cancelBtn');
+//add these elements but not append to any parent yet until function is called
+// const removeBtn = document.createElement('button');
+// removeBtn.classList.add('removeBtn');
+const readChkBox = document.createElement('input');
+readChkBox.setAttribute('type','checkobox');
+readChkBox.classList.add('readChkBox');
+
 //newBook button opens dialog modally
 newBookButton.addEventListener("click",()=>{
     newBookDialog.showModal();
