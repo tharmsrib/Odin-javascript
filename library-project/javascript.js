@@ -7,11 +7,33 @@ function Book(bookTitle,author,numPage){
     this.numPage=Number(numPage);
 }
 
-function addBookToLibrary(bookObj){
+function addBookToLibraryArray(bookObj){
     //do stuff here
     myLibrary.push(bookObj);
 }
 
+
+function removeBookFromLibraryArray(bookCardElement){
+    //take book card div and use it content (title,author and apge)
+    //to filter myLibrary array of object
+    let a = bookCardElement.querySelector('.bookContent');
+    string = a.textContent;
+
+    //find book title from book context tag
+    let title = string.slice(0,string.indexOf(' by'));
+    let author = string.slice(string.indexOf(' by')+4, string.indexOf(' number'));
+    let numPage = Number(string.slice(string.indexOf(': ')+2));
+    //filter mLibrary and replace new one
+    myLibrary = myLibrary.filter((book)=>{
+        if(book.title===title&&book.author===author&&book.numPage===numPage){
+            //return false if its a match with a removing book
+            return false;
+        }
+        return true;//return true to keep
+        
+    });
+    console.log(myLibrary)
+}
 // Write a function that loops through the array and 
 // displays each book on the page. You can display 
 // them in some sort of table, or each on their own 
@@ -33,18 +55,55 @@ function displayBooks(){
 
 function displayLastBook(){
     let i = myLibrary.length -1;//-1 for the indexing
-    
-    
     //create element and add class and text to it
-    // console.log(book);
-
     const newBookDiv = createBookCardsElement(myLibrary[i]);
     // newBookDiv.classList.add(`card${i}`);       
     libraryDiv.appendChild(newBookDiv);
+}
 
 
+function createBookCardsElement(bookObj){
+    //create div element and add book content to it
+    let newBookCardDiv = document.createElement('div');
+    newBookCardDiv.classList.add('bookCard');
+    
+    let a = document.createElement('a');
+    a.classList.add('bookContent');
+    a.textContent = `${bookObj.title} by ${bookObj.author} number pages: ${bookObj.numPage}`;
+    newBookCardDiv.appendChild(a);
+    //append read check box
+    createChkBoxElement(newBookCardDiv);
+
+    //append remove button
+    createRemoveButton(newBookCardDiv);
+
+    console.log(`creating div : `);
+    console.log(newBookCardDiv);
+    return newBookCardDiv;
+}
+
+function createChkBoxElement(parentElement){
+    //parentElement = bookcard div
+    //add unread calss as default
+    parentElement.classList.add('unreadBook');
+    //create input element
+    let chkBox = document.createElement('input');
+    chkBox.setAttribute('type','checkbox');
+    chkBox.textContent = 'READ'
+    //attach even listener
+    chkBox.addEventListener('change',function(){
+        if(this.checked){
+            parentElement.classList.remove('unreadBook');
+            parentElement.classList.add('readBook');
+        }else{
+            parentElement.classList.remove('readBook');
+            parentElement.classList.add('unreadBook');
+        }
+    });
+    parentElement.appendChild(chkBox);
 
 }
+
 
 function createRemoveButton(parentElement){
     //parentElement = bookcard div
@@ -57,7 +116,7 @@ function createRemoveButton(parentElement){
         //remove from display library
         parentElement.remove();
         //remove from array
-        removeBookFromArray(parentElement);
+        removeBookFromLibraryArray(parentElement);
         //
 
     })
@@ -65,49 +124,8 @@ function createRemoveButton(parentElement){
     parentElement.appendChild(removeBtn);
 }
 
-function createBookCardsElement(bookObj){
-    //create div element and add book content to it
-    let newBookCardDiv = document.createElement('div');
-    newBookCardDiv.classList.add('bookCard');
-    
-    let a = document.createElement('a');
-    a.classList.add('bookContent');
-    a.textContent = `${bookObj.title} by ${bookObj.author} number pages: ${bookObj.numPage}`;
-    newBookCardDiv.appendChild(a);
-    //append read check box
 
 
-    //append remove button
-    createRemoveButton(newBookCardDiv);
-
-    console.log(`creating div : `);
-    console.log(newBookCardDiv);
-    return newBookCardDiv;
-}
-
-function removeBookFromArray(bookCardElement){
-    //take book card div and use it content (title,author and apge)
-    //to filter myLibrary array of object
-    let a = bookCardElement.querySelector('.bookContent');
-    string = a.textContent;
-
-    //find book title from book context tag
-    let title = string.slice(0,string.indexOf(' by'));
-    let author = string.slice(string.indexOf(' by')+4, string.indexOf(' number'));
-    let numPage = Number(string.slice(string.indexOf(': ')+2));
-    //filter mLibrary and replace new one
-    
-    myLibrary = myLibrary.filter((book)=>{
-     
-        if(book.title===title&&book.author===author&&book.numPage===numPage){
-            //return false if its a match with a removing book
-            return false;
-        }
-        return true;//return true to keep
-        
-    });
-    console.log(myLibrary)
-}
 
 
 let myLibrary = [];
@@ -144,10 +162,13 @@ confirmBtn.addEventListener("click", (event) => {
         console.log(`new book object: `);
         console.log(newBook);
         //add new book to library array
-        addBookToLibrary(newBook);
+        addBookToLibraryArray(newBook);
         console.log('new book add')
         console.log(myLibrary);
             
+        //reset dialog value
+        document.getElementById('newBookForm').reset();
+        
         confirmBtn.value = 'submit';
         event.preventDefault(); // We don't want to submit this fake form
         newBookDialog.close(confirmBtn.value); // Have to send the select box value here.
@@ -184,8 +205,8 @@ newBookDialog.addEventListener("close", () => {
 //manual book
 let bookA = new Book('a','gg',3);
 let bookB = new Book('b','gg',3);
-addBookToLibrary(bookA);
-addBookToLibrary(bookB);
+addBookToLibraryArray(bookA);
+addBookToLibraryArray(bookB);
 displayBooks();
 
 

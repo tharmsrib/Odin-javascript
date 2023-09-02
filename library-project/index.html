@@ -15,14 +15,24 @@
         </div>
 
         <dialog id="newBookDialog">
-            <form >
-                <label for="newBookTitle">Book title</label>
-                <input type="text" name="newBookTitle" id="newBookTitle" placeholder="title" required />
-                <label for="newBookAuthor">Book author</label>
-                <input type="text" name="newBookAuthor" id="newBookAuthor" placeholder="author" required />
-                <label for="newBookNumPage">Number of pages</label>
-                <input type="number" name="newBookNumPage" id="newBookNumPage" placeholder="0" required />
+            <form id="newBookForm">
+                <p>
+                    <label for="newBookTitle">Book title</label>
+                    <input type="text" name="newBookTitle" id="newBookTitle" placeholder="title" value='' required />
+                
+                </p>
+                
+                <p>
+                    <label for="newBookAuthor">Book author</label>
+                    <input type="text" name="newBookAuthor" id="newBookAuthor" placeholder="author" value='' required />
+                
+                </p>
+                <p>
+                    <label for="newBookNumPage">Number of pages</label>
+                    <input type="number" name="newBookNumPage" id="newBookNumPage" placeholder="0" value='' required />
 
+                </p>
+                
 
                 <div class="buttons dialogBtn">
                     <button type="button" formmethod="dialog" id="cancelBtn" value="cancel" >Cancel</button>
