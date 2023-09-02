@@ -1,8 +1,8 @@
 
 
-function Book(bookName,author,numPage){
+function Book(bookTitle,author,numPage){
     //the constructor
-    this.name=bookName;
+    this.title=bookTitle;
     this.author=author;
     this.numPage=numPage;
 }
@@ -24,7 +24,7 @@ function displayBooks(){
         
         // console.log(book);
         const newBookDiv = createBookCardsElement(book);
-        newBookDiv.classList.add(`card${i}`);       
+        // newBookDiv.classList.add(`card${i}`);       
         libraryDiv.appendChild(newBookDiv);
         i++;
 
@@ -39,7 +39,7 @@ function displayLastBook(){
     // console.log(book);
 
     const newBookDiv = createBookCardsElement(myLibrary[i]);
-    newBookDiv.classList.add(`card${i}`);       
+    // newBookDiv.classList.add(`card${i}`);       
     libraryDiv.appendChild(newBookDiv);
 
 
@@ -47,12 +47,19 @@ function displayLastBook(){
 }
 
 function createRemoveButton(parentElement){
+    //parentElement = bookcard div
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('removeBtn');
     removeBtn.textContent = 'X';
     //funct callback attachment
     removeBtn.addEventListener('click',()=>{
+        console.log(`removing book`);
+        //remove from display library
         parentElement.remove();
+        //remove from array
+        removeBookFromArray(parentElement);
+        //
+
     })
 
     parentElement.appendChild(removeBtn);
@@ -60,33 +67,47 @@ function createRemoveButton(parentElement){
 
 function createBookCardsElement(bookObj){
     //create div element and add book content to it
-    let newDiv = document.createElement('div');
+    let newBookCardDiv = document.createElement('div');
+    newBookCardDiv.classList.add('bookCard');
+    
     let a = document.createElement('a');
-    newDiv.classList.add('bookCard');
     a.classList.add('bookContent');
-    a.textContent = `${bookObj.name} by ${bookObj.name} number pages: ${bookObj.numPage}`;
-    newDiv.appendChild(a);
+    a.textContent = `${bookObj.title} by ${bookObj.author} number pages: ${bookObj.numPage}`;
+    newBookCardDiv.appendChild(a);
     //append read check box
 
 
     //append remove button
-    createRemoveButton(newDiv);
-    
-    
+    createRemoveButton(newBookCardDiv);
+
     console.log(`creating div : `);
-    console.log(newDiv);
-    return newDiv;
+    console.log(newBookCardDiv);
+    return newBookCardDiv;
 }
 
-function removeAllBooks(){
-    //remove all childs of libraryDiv
-    while (libraryDiv.firstChild) {
-        libraryDiv.removeChild(libraryDiv.lastChild);
-    }
+function removeBookFromArray(bookCardElement){
+    //take book card div and use it content (title,author and apge)
+    //to filter myLibrary array of object
+    let a = bookCardElement.querySelector('.bookContent');
+    string = a.textContent;
+
+    //find book title from book context tag
+    let title = string.slice(0,string.indexOf(' by'));
+    let author = string.slice(string.indexOf(' by')+4, string.indexOf(' number'));
+    let numPage = Number(string.slice(string.indexOf(': ')+2));
+    //filter mLibrary and replace new one
+    myLibrary = myLibrary.filter((book)=>{
+        if(book.title===title&&book.author===author&&book.numPage===numPage){
+            //return false if its a match with a removing book
+            return false;
+        }
+        return true;
+        
+    });
 }
 
 
-const myLibrary = [];
+let myLibrary = [];
 const libraryDiv = document.querySelector('.library-container');
 const newBookButton = document.querySelector('.newBookBtn');
 const newBookDialog = document.getElementById('newBookDialog');
