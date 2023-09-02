@@ -27,6 +27,10 @@
     
 }
 
-/* .removeBtn{
+.readBook{
+    background-color: lightgreen;
+}
 
-} */
+.unreadBook{
+    background-color: lightcoral;
+}

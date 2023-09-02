@@ -4,7 +4,7 @@ function Book(bookTitle,author,numPage){
     //the constructor
     this.title=bookTitle;
     this.author=author;
-    this.numPage=numPage;
+    this.numPage=Number(numPage);
 }
 
 function addBookToLibrary(bookObj){
@@ -96,14 +96,17 @@ function removeBookFromArray(bookCardElement){
     let author = string.slice(string.indexOf(' by')+4, string.indexOf(' number'));
     let numPage = Number(string.slice(string.indexOf(': ')+2));
     //filter mLibrary and replace new one
+    
     myLibrary = myLibrary.filter((book)=>{
+     
         if(book.title===title&&book.author===author&&book.numPage===numPage){
             //return false if its a match with a removing book
             return false;
         }
-        return true;
+        return true;//return true to keep
         
     });
+    console.log(myLibrary)
 }
 
 
