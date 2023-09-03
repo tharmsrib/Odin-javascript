@@ -201,8 +201,8 @@ newBookDialog.addEventListener("close", () => {
 });
 
 //manual book
-let bookA = new Book('a','gg',3);
-let bookB = new Book('b','gg',3);
+let bookA = new Book('Naruto','Masashi Kishimoto',1000);
+let bookB = new Book('One Piece','Eiichiro Oda',3000);
 addBookToLibraryArray(bookA);
 addBookToLibraryArray(bookB);
 displayBooks();
