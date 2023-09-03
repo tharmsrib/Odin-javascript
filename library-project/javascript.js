@@ -89,7 +89,10 @@ function createChkBoxElement(parentElement){
     //create input element
     let chkBox = document.createElement('input');
     chkBox.setAttribute('type','checkbox');
-    chkBox.textContent = 'READ'
+    chkBox.id = 'checkbox';
+    let chkBoxLabel = document.createElement('label');
+    chkBoxLabel.setAttribute('for','checkbox');
+    chkBoxLabel.textContent = 'READ';
     //attach even listener
     chkBox.addEventListener('change',function(){
         if(this.checked){
@@ -101,6 +104,7 @@ function createChkBoxElement(parentElement){
         }
     });
     parentElement.appendChild(chkBox);
+    parentElement.appendChild(chkBoxLabel);
 
 }
 
@@ -134,12 +138,6 @@ const newBookButton = document.querySelector('.newBookBtn');
 const newBookDialog = document.getElementById('newBookDialog');
 const confirmBtn = document.getElementById('confirmBtn');
 const cancelBtn = document.getElementById('cancelBtn');
-//add these elements but not append to any parent yet until function is called
-// const removeBtn = document.createElement('button');
-// removeBtn.classList.add('removeBtn');
-const readChkBox = document.createElement('input');
-readChkBox.setAttribute('type','checkobox');
-readChkBox.classList.add('readChkBox');
 
 //newBook button opens dialog modally
 newBookButton.addEventListener("click",()=>{
