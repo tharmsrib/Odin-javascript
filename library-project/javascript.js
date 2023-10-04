@@ -95,7 +95,8 @@ function createChkBoxElement(parentElement){
     chkBoxLabel.textContent = 'READ';
     //attach even listener
     chkBox.addEventListener('change',function(){
-        if(this.checked){
+        
+        if(parentElement.childNodes[1].checked){
             parentElement.classList.remove('unreadBook');
             parentElement.classList.add('readBook');
         }else{
